@@ -1,0 +1,8 @@
+{
+    "app": "valibrasil",
+    "postgreaddress": "localhost",
+    "database": "valibrasil",
+    "user": "valibrasil",
+    "password": "leonardo",
+    "ssl": false
+}

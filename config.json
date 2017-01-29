@@ -1,3 +1,8 @@
 {
-    "postgreaddress": "localhost"
+    "app": "valibrasil",
+    "postgreaddress": "ec2-50-19-125-201.compute-1.amazonaws.com",
+    "database": "d6rbbtaa6ml7od",
+    "user": "awhapbwzavzxjv",
+    "password": "5ecb963a3b0ee588086e7b8d6d48349ade63db107741a5fa04fc49b4349007a6",
+    "ssl": true
 }

@@ -3,13 +3,14 @@ var config = require('./../config.json');
 
 module.exports = {
     config: {
-        user: 'postgres', //env var: PGUSER 
-        database: 'valibrasil', //env var: PGDATABASE 
-        password: 'leonardo', //env var: PGPASSWORD 
+        user: config.user, //env var: PGUSER 
+        database: config.database, //env var: PGDATABASE 
+        password: config.password, //env var: PGPASSWORD 
         host: config.postgreaddress, // Server hosting the postgres database 
         port: 5432, //env var: PGPORT 
         max: 10, // max number of clients in the pool 
         idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed 
+        ssl: config.ssl
     },
     doquery: function (query, callback) {
         var pool = new pg.Pool(this.config);
