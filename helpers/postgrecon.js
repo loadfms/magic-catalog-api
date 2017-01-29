@@ -1,8 +1,9 @@
 var pg = require('pg');
-var config = require('./../config.json');
+var env = require('./../configs/env.json');
+var config = require('./../configs/config.' + env.current + '.json');
 
 module.exports = {
-    config: {
+    dbconfig: {
         user: config.user, //env var: PGUSER 
         database: config.database, //env var: PGDATABASE 
         password: config.password, //env var: PGPASSWORD 
@@ -13,7 +14,7 @@ module.exports = {
         ssl: config.ssl
     },
     doquery: function (query, callback) {
-        var pool = new pg.Pool(this.config);
+        var pool = new pg.Pool(this.dbconfig);
         const items = undefined;
 
         pool.connect(function (err, client, done) {

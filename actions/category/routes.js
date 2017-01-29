@@ -3,18 +3,16 @@ var category = require('./index');
 
 module.exports = {
     register(router) {
-        router.get('/api/category', function (req, res) {
-            //res.json(status);
+        router.get('/api/:app/category', function (req, res) {
             category.get(function (items) {
                 res.json(items);
-            });
+            }, req.params.app);
         });
 
-        router.get('/api/category/menu', function (req, res) {
-            //res.json(status);
+        router.get('/api/:app/category/menu', function (req, res) {
             category.menu(function (items) {
                 res.json(items);
-            });
+            }, req.params.app);
         });
     }
 }

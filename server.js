@@ -11,8 +11,6 @@ var bodyParser = require('body-parser');
 var categoryRoutes = require('./actions/category/routes');
 var productRoutes = require('./actions/product/routes');
 
-var status = false;
-
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,11 +24,6 @@ var router = express.Router();              // get an instance of the express Ro
 
 categoryRoutes.register(router);
 productRoutes.register(router);
-
-router.post('/api', function (req, res) {
-    status = !status;
-    res.json(status);
-});
 
 // more routes for our API will happen here
 app.all('*', function (req, res, next) {

@@ -1,9 +1,12 @@
 {
     "name": "node-api",
-    "main": "server.js",
     "dependencies": {
         "express": "~4.0.0",
         "body-parser": "~1.0.1",
         "pg": "^6.1.2"
+    },
+    "scripts": {
+        "start": "node ./configs/calibrate.js prd && node server.js",
+        "dev": "node ./configs/calibrate.js dev && node server.js"
     }
 }

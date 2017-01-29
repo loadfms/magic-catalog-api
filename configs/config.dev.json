@@ -1,5 +1,4 @@
 {
-    "app": "valibrasil",
     "postgreaddress": "localhost",
     "database": "valibrasil",
     "user": "valibrasil",
