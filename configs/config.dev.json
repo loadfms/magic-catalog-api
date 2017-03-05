@@ -1,7 +1,7 @@
 {
     "postgreaddress": "localhost",
-    "database": "valibrasil",
-    "user": "valibrasil",
-    "password": "leonardo",
+    "database": "magiccatalog",
+    "user": "mc",
+    "password": "teste123",
     "ssl": false
 }
