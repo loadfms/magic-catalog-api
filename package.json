@@ -1,15 +1,23 @@
 {
-    "name": "node-api",
-    "engines": {
-        "node": "6.3.0"
-    },
-    "dependencies": {
-        "express": "~4.0.0",
-        "body-parser": "~1.0.1",
-        "pg": "^6.1.2"
-    },
-    "scripts": {
-        "start": "node ./configs/calibrate.js prd && node server.js",
-        "dev": "node ./configs/calibrate.js dev && node server.js"
-    }
+  "name": "node-api",
+  "engines": {
+    "node": "6.3.0"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.100.0",
+    "body-parser": "~1.0.1",
+    "express": "~4.0.0",
+    "multer": "^1.3.0",
+    "pg": "^6.1.2"
+  },
+  "scripts": {
+    "build": "rimraf release/ && babel ./ --out-dir release/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
+    "start": "node ./configs/calibrate.js prd && npm run build",
+    "dev": "node ./configs/calibrate.js dev && npm run build &&  node release/server.js"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "rimraf": "^2.6.1"
+  }
 }

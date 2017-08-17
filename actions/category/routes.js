@@ -9,15 +9,20 @@ module.exports = {
             }, req.params.app);
         });
 
-        router.post('/api/:app/category', function(req, res){
-            category.post(function(result){
+        router.post('/api/:app/category', function (req, res) {
+            category.post(function (result) {
                 res.json(result);
             }, req.params.app, req.body)
         });
 
-        router.delete('/api/:app/category/:id',function(req,res){
-            console.log(req.body);
-            category.delete(function(result){
+        router.put('/api/:app/category', function (req, res) {
+            category.put(function (result) {
+                res.json(result);
+            }, req.params.app, req.body)
+        });
+
+        router.delete('/api/:app/category/:id', function (req, res) {
+            category.delete(function (result) {
                 res.json(result);
             }, req.params.app, req.params.id)
         });

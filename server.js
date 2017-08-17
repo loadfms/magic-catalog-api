@@ -10,6 +10,7 @@ var bodyParser = require('body-parser');
 
 var categoryRoutes = require('./actions/category/routes');
 var productRoutes = require('./actions/product/routes');
+var uploader = require('./actions/s3/index');
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -24,6 +25,9 @@ var router = express.Router();              // get an instance of the express Ro
 
 categoryRoutes.register(router);
 productRoutes.register(router);
+new uploader.S3Uploader(router);
+
+
 
 // more routes for our API will happen here
 app.all('*', function (req, res, next) {
@@ -39,6 +43,7 @@ app.all('*', function (req, res, next) {
 });
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
+
 app.use('/', router);
 
 // START THE SERVER
