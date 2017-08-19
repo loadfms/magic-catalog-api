@@ -13,7 +13,10 @@ export class componentProduct {
         postgres.doquery(query, callback);
     }
     save(app, body, callback) {
-        postgres.doquery('insert into tb_' + app + '_product (name, description, image, status) values (\'' + body.name + '\', \'' + body.description + '\', \'' + body.image + '\', true)', callback)
+        postgres.doquery('insert into tb_' + app + '_product (name, description, image, status) values (\'' + body.name + '\', \'' + body.description + '\', \'' + body.image + '\', true)', () => {
+            var query = 'select id from tb_' + app + '_product order by id desc limit 1';
+            postgres.doquery(query, callback);
+        });
     }
     update(app, body, callback) {
         postgres.doquery('update tb_' + app + '_product set name = \'' + body.name + '\' , description = \'' + body.description + '\', image = \'' + body.image + '\', status = ' + body.status + ' where id = ' + body.id, callback)
