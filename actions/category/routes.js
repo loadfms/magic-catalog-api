@@ -32,5 +32,11 @@ module.exports = {
                 res.json(items);
             }, req.params.app);
         });
+
+        router.get('/api/:app/category/product/:productid', function (req, res) {
+            category.getbyproduct(function (items) {
+                res.json(items);
+            }, req.params.app, req.params.productid);
+        });
     }
 }

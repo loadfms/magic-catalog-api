@@ -14,11 +14,15 @@ export class S3Uploader {
         this.upload = this.upload.bind(this);
     }
     upload(filename, data, callback) {
+        var buf = new Buffer(data.data_uri.replace(/^data:image\/\w+;base64,/, ""),'base64');
+        
         this.s3.putObject({
             Bucket: this.s3bucket,
-            Key: filename,
-            Body: data,
+            Key: data.filename,
+            Body: buf,
             ACL: 'public-read', // your permisions  
+            ContentEncoding: 'base64',
+            ContentType: data.filetype
         }, (err) => {
             callback(err);
         })
@@ -32,16 +36,16 @@ export class S3Uploader {
         })
     }
     register(router) {
-        router.delete('/api/upload/:id', (req, res) => {
+        router.delete('/api/:app/upload/:id', (req, res) => {
             this.delete(req.params.id, (err) => {
                 if (err != undefined) return res.status(400).send(err);
                 else res.send('File deleted from S3');
             })
         })
-        router.post('/api/upload', this.multerupload.single('imagedata'), (req, res) => {
-            this.upload(req.file.originalname, req.file.buffer, (err) => {
+        router.post('/api/:app/upload', (req, res) => {
+            this.upload("fall.png", req.body, (err) => {
                 if (err != undefined) return res.status(400).send(err);
-                else res.send('File uploaded to S3');
+                else res.json({uri: 'https://s3.amazonaws.com/vali-brasil/' + req.body.filename});
             })
         })
     }

@@ -9,13 +9,15 @@ var app = express();                 // define our app using express
 var bodyParser = require('body-parser');
 
 var categoryRoutes = require('./actions/category/routes');
-var productRoutes = require('./actions/product/routes');
+var product = require('./actions/product/index');
 var uploader = require('./actions/s3/index');
+var categoryproduct = require('./actions/categoryproduct/index');
+
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 var port = process.env.PORT || 8080;        // set our port
 
@@ -24,8 +26,9 @@ var port = process.env.PORT || 8080;        // set our port
 var router = express.Router();              // get an instance of the express Router
 
 categoryRoutes.register(router);
-productRoutes.register(router);
+new product.componentProduct(router);
 new uploader.S3Uploader(router);
+new categoryproduct.CategoryProduct(router);
 
 
 
@@ -34,7 +37,7 @@ app.all('*', function (req, res, next) {
     if (!req.get('Origin')) return next();
 
     res.set('Access-Control-Allow-Origin', '*');
-    res.set('Access-Control-Allow-Methods', 'GET,POST');
+    res.set('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE');
     res.set('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type');
 
     if ('OPTIONS' == req.method) return res.send(200);
