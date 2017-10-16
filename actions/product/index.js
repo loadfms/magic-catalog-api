@@ -5,7 +5,7 @@ export class componentProduct {
         this.register(router);
     }
     getall(app, callback) {
-        var query = 'select * from tb_' + app + '_product order by name'
+        var query = 'select * from tb_' + app + '_product where image is not null order by name'
         postgres.doquery(query, callback);
     }
     getcover(app, callback) {
