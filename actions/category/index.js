@@ -14,7 +14,7 @@ module.exports = {
         postgres.doquery('delete from tb_' + app + '_category where id = ' + id, callback)
     },
     getbyproduct: function (callback, app, productid) {
-        var query = 'select p.* from tb_' + app + '_category p inner join tb_' + app + '_category_product cp on cp.category_id = p.id where cp.product_id = ' + productid
+        var query = 'select p.* from tb_' + app + '_category p inner join tb_' + app + '_category_product cp on cp.category_id = p.id inner join tb_' + app + '_product pr on cp.product_id = pr.id where pr.image is not null and cp.product_id = ' + productid
         var result = [];
         postgres.doquery(query, function (items) {
             items.rows.map((object, id) => {
