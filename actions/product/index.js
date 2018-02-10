@@ -17,7 +17,7 @@ export class componentProduct {
         postgres.doquery(query, callback);
     }
     getbycategory(app, category, callback) {
-        var query = 'select p.* from tb_' + app + '_product p inner join tb_' + app + '_category_product cp on cp.product_id = p.id inner join tb_' + app + '_category c on c.id = cp.category_id where p.status = true and lower(unaccent(c.name)) = \'' + category + '\' and p.image is not null order by p.name'
+        var query = 'select distinct p.* from tb_' + app + '_product p inner join tb_' + app + '_category_product cp on cp.product_id = p.id inner join tb_' + app + '_category c on c.id = cp.category_id where p.status = true and lower(unaccent(c.name)) = \'' + category + '\' and p.image is not null order by p.name'
         postgres.doquery(query, callback);
     }
     save(app, body, callback) {
