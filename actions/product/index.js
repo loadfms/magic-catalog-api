@@ -4,6 +4,10 @@ export class componentProduct {
     constructor(router) {
         this.register(router);
     }
+    getone(app, id, callback){
+        var query = 'select * from tb_' + app + '_product where id = ' + id;
+        postgres.doquery(query, callback);
+    }
     getall(app, callback) {
         var query = 'select * from tb_' + app + '_product order by name'
         postgres.doquery(query, callback);
@@ -41,6 +45,11 @@ export class componentProduct {
         });
         router.get('/api/:app/product/:category', (req, res) => {
             this.getbycategory(req.params.app, req.params.category, (items) => {
+                res.json(items);
+            })
+        });
+        router.get('/api/:app/product/single/:id', (req, res) => {
+            this.getone(req.params.app, req.params.id, (items) => {
                 res.json(items);
             })
         });
