@@ -19,7 +19,7 @@ var categoryproduct = require('./actions/categoryproduct/index');
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
-var port = process.env.PORT || 8080;        // set our port
+var port = process.env.PORT || 8081;        // set our port
 
 // ROUTES FOR OUR API
 // =============================================================================
@@ -52,4 +52,4 @@ app.use('/', router);
 // START THE SERVER
 // =============================================================================
 app.listen(port);
-console.log('api running on port 8080');
+console.log('api running on port 8081');
