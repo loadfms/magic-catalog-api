@@ -9,6 +9,7 @@ var app = express();                 // define our app using express
 var bodyParser = require('body-parser');
 
 var categoryRoutes = require('./actions/category/routes');
+var loginRoutes = require('./actions/login/routes');
 var product = require('./actions/product/index');
 var uploader = require('./actions/s3/index');
 var categoryproduct = require('./actions/categoryproduct/index');
@@ -26,6 +27,8 @@ var port = process.env.PORT || 8081;        // set our port
 var router = express.Router();              // get an instance of the express Router
 
 categoryRoutes.register(router);
+loginRoutes.register(router);
+
 new product.componentProduct(router);
 new uploader.S3Uploader(router);
 new categoryproduct.CategoryProduct(router);
